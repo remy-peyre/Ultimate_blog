@@ -1,10 +1,13 @@
 <?php
- namespace App\Entity;
- use Doctrine\ORM\Mapping as ORM;
+
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+
  /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields="email", message="Email already taken")
@@ -56,13 +59,23 @@ class User implements UserInterface
      * @ORM\Column(name="sortRole", type="string", length=100)
      */
     private $sortRole;
-	
-	
+
+    /**
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="users")
+     */
+    private $post;
+    
+     /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="users")
+     */
+    private $comment;
     
     public function __construct()
     {
         $this->createdAt = new \DateTime(date('Y-m-d H:i:s'));
         $this->sortRole = "ROLE_USER";
+        $this->post = new ArrayCollection();
+        $this->comment = new ArrayCollection();
     }
      public function __toString()
     {
@@ -185,5 +198,39 @@ class User implements UserInterface
 	{
 		$this->sortRole = $sortRole;
  		return $this;
-	}
+    }
+    /**
+     * Get the value of post
+     */ 
+    public function getPost()
+    {
+        return $this->post;
+    }
+     /**
+     * Set the value of post
+     *
+     * @return  mixed
+     */ 
+    public function setPost($post)
+    {
+        $this->post = $post;
+         return $this;
+    }
+     /**
+     * Get the value of comment
+     */ 
+    public function getComment()
+    {
+        return $this->comment;
+    }
+     /**
+     * Set the value of comment
+     *
+     * @return  mixed
+     */ 
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+         return $this;
+    }
 }
