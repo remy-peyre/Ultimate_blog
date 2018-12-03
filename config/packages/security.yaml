@@ -1,0 +1,34 @@
+security:
+
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+    role_hierarchy:
+        ROLE_TEACHER: ROLE_STUDENT
+        ROLE_SUPER_ADMIN: ROLE_TEACHER
+
+    providers:
+        our_db_provider:
+            entity:
+                class: App\Entity\User
+                property: username
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login
+            logout:
+                path:   /logout
+                target: /login
+
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, role: ROLE_SUPER_ADMIN }
+        - { path: ^/home, role: ROLE_STUDENT }
+        - { path: ^/register_subject, role: ROLE_STUDENT }
+        - { path: ^/add, role: ROLE_TEACHER }
