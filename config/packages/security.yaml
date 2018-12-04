@@ -32,3 +32,4 @@ security:
         - { path: ^/home, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/profil, role: [ROLE_ADMIN, ROLE_USER, ROLE_BLOGGER] }
         - { path: ^/admin, role: ROLE_ADMIN }
+        - { path: ^/create-post, role: [ROLE_BLOGGER, ROLE_ADMIN] }
