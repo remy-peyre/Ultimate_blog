@@ -22,7 +22,7 @@ class User implements UserInterface
      */
     private $id;
 
-     /**
+    /**
      * @ORM\Column(name="firstname", type="string", length=100)
      */
     private $firstname;
@@ -58,7 +58,7 @@ class User implements UserInterface
 	 */
     private $createdAt;
     
-     /**
+    /**
      * @ORM\Column(name="sortRole", type="string", length=100)
      */
     private $sortRole;
@@ -68,7 +68,7 @@ class User implements UserInterface
      */
     private $post;
 
-     /**
+    /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="users", cascade={"persist", "remove"})
      */
     private $comment;

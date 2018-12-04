@@ -59,6 +59,43 @@ class SecurityController extends Controller
     public function logoutAction()
     {
 
- 	}
+    }
+     
+    /**
+    * @Route("/profil", name="profil")
+    */
+    public function profilAction(Request $request)
+    {
+        /*$user = $this -> getUser();
+
+        return $this->render('blog/profil.html.twig', [
+            'user' => $user,
+        ]);*/
+
+        $user = $this -> getUser();
+        //dump($user);
+        //die();
+
+        if($request->isMethod('POST') && 
+        !empty($request -> get("lastname")) &&
+        !empty($request -> get("firstname")) && 
+        !empty($request -> get("username")) && 
+        !empty($request -> get("password")) )
+        {
+            $hash = $this->get('security.password_encoder')->encodePassword($user, $request->request->get('password'));
+
+            $user -> setFirstname($request -> get("firstname"));
+            $user -> setLastname($request -> get("lastname"));
+            $user -> setPassword($hash);
+            $user -> setUsername($request -> get("username"));
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+        }
+	    return $this->render('blog/profil.html.twig',[
+            'user' => $user
+        ]);
+    }
 	
 } 
