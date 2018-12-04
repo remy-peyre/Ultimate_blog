@@ -20,22 +20,33 @@ class Comment
      */
     private $id;
 
-     /**
+    /**
      * @ORM\Column(name="content", type="text")
      */
     private $content;
 
-     /**
+    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="commentaires")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $users;
     
-     /**
+    /**
      * @ORM\ManyToOne(targetEntity="Post", inversedBy="commentaires")
      * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      */
     private $post;
+
+    /**
+	 * @var \DateTime $createdAt
+	 * @ORM\Column(name="created_at", type="datetime", length=100)
+	 */
+    private $createdAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime(date('Y-m-d H:i:s'));
+    }
 
     public function __toString(){
         return (string)$this->id;
@@ -113,6 +124,29 @@ class Comment
     public function setPost($post)
     {
         $this->post = $post;
+         return $this;
+    }
+
+    /**
+     * Get $createdAt
+     *
+     * @return  \DateTime
+     */ 
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+     
+    /**
+     * Set $createdAt
+     *
+     * @param  \DateTime  $createdAt  $createdAt
+     *
+     * @return  self
+     */ 
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
          return $this;
     }
 }

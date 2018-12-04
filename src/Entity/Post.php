@@ -45,7 +45,13 @@ class Post
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="post", cascade={"persist", "remove"})
      */
-    private $commentaires;
+    private $comment;
+
+    /**
+	 * @var \DateTime $createdAt
+	 * @ORM\Column(name="created_at", type="datetime", length=100)
+	 */
+    private $createdAt;
 
     public function __toString(){
         return $this->title;
@@ -53,7 +59,8 @@ class Post
 
     public function __construct()
     {
-        $this->commentaires = new ArrayCollection();
+        $this->createdAt = new \DateTime(date('Y-m-d H:i:s'));
+        $this->comment = new ArrayCollection();
     }
 
     /**
@@ -152,21 +159,44 @@ class Post
     }
 
     /**
-     * Get the value of commentaires
+     * Get the value of comment
      */ 
-    public function getCommentaires()
+    public function getComment()
     {
-        return $this->commentaires;
+        return $this->comment;
     }
     
     /**
-     * Set the value of commentaires
+     * Set the value of comment
      *
      * @return  self
      */ 
-    public function setCommentaires($commentaires)
+    public function setComment($comment)
     {
-        $this->commentaires = $commentaires;
+        $this->comment = $comment;
+         return $this;
+    }
+
+    /**
+     * Get $createdAt
+     *
+     * @return  \DateTime
+     */ 
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+     
+    /**
+     * Set $createdAt
+     *
+     * @param  \DateTime  $createdAt  $createdAt
+     *
+     * @return  self
+     */ 
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
          return $this;
     }
 } 

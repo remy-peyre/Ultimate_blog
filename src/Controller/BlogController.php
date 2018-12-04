@@ -18,8 +18,12 @@ class BlogController extends AbstractController
      */
     public function index()
     {
-        return $this->render('blog/index.html.twig', [
-            'controller_name' => 'BlogController',
+        $user = $this -> getUser();
+        $post =  $this->getDoctrine()->getRepository(Post::class) -> findBy([], ['id' => 'DESC']);
+
+	    return $this->render('blog/index.html.twig',[
+            'user' => $user,
+            'post' => $post
         ]);
     }
 
@@ -29,7 +33,8 @@ class BlogController extends AbstractController
     public function createPostAction(Request $request)
     {
         $user = $this -> getUser();
-        if($request->isMethod('POST')){
+        if($request->isMethod('POST'))
+        {
             $file = $request -> files-> get("picture") ;
             $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
             
@@ -58,7 +63,51 @@ class BlogController extends AbstractController
             'user' => $user
         ]);
     }
-     
+
+    /**
+     * @Route("/post/{id}", name="show_post")
+     */
+    public function postAction($id)
+    {
+        $user = $this->getUser();
+        $post =  $this->getDoctrine()->getRepository(Post::class) -> findById($id);
+
+        if($post === NULL || empty($post) )
+        {
+            return $this->redirectToRoute('homepage');
+        } else {
+            return $this->render('blog/post.html.twig',[
+                'user' => $user,
+                'post' => $post
+            ]);          
+        }
+    }
+
+    /**
+     * @Route("/create-comment/{id}", name="create-comment")
+     */
+    public function createCommentAction(Request $request, $id)
+    {
+        $user = $this -> getUser();
+
+        if($request -> isMethod('POST'))
+        {
+            $post =  $this->getDoctrine()->getRepository(Post::class) -> findOneById($id); 
+            $comment = new Comment();
+            $comment -> setContent($request -> get("content"));
+            $comment -> setUsers($user);
+            $comment -> setPost($post);
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+
+            return $this->redirectToRoute('show_post', array('id' => $id));
+        } else {
+            return $this->redirectToRoute('homepage');
+        }
+    }
+
     /**
      * @return string
      */
@@ -66,4 +115,5 @@ class BlogController extends AbstractController
     {
         return md5(uniqid());
     }
+    
 }

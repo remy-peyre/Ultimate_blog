@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <div class="container" >
+        {% for article in post %}
+            <div class="row">
+                <h1>{{article.title}}</h1>
+                <h5>Created by {{article.users.username}}, at {{article.createdAt|date("m/d/Y")}}</h5>
+                <img src="{{asset('static/images/article/'~ article.picture)}}">
+                <p>{{article.content}}</p>
+            </div>
+            {% if app.user %}
+                <div class="row">
+                    <h2>Add comments</h2>
+                    <form action="{{path("create-comment",{"id": article.id}) }}" method="POST">
+                        <div>
+                            <textarea id="textarea1" name="content" required ></textarea>
+                            <label for="textarea1">Content</label>
+                        </div>
+                        <button type="submit" name="action">Submit</button>
+                    </form>
+                </div>
+            {% endif %}
+            
+            <div class="row">
+                <h2>Comments</h2>
+                {#{{ comment }}
+                
+                {% for postComment in comment %}
+                    <hr>
+                    <span>Created by {{postComment.users.username}}, at {{postComment.createdAt|date("m/d/Y")}}</span>
+                    <p>{{postComment.content}}</p>
+                    <hr>
+                {% endfor %}#}
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
