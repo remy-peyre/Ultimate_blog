@@ -5,7 +5,8 @@ security:
             algorithm: bcrypt
     role_hierarchy:
         ROLE_USER: ROLE_USER
-        ROLE_ADMIN: ROLE_USER
+        ROLE_BLOGGER: ROLE_USER
+        ROLE_ADMIN: ROLE_BLOGGER
 
     providers:
         our_db_provider:
@@ -23,10 +24,11 @@ security:
                 check_path: login
             logout:
                 path:   /logout
-                target: /login
+                target: /
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/home, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/profil, role: [ROLE_ADMIN, ROLE_USER, ROLE_BLOGGER] }
         - { path: ^/admin, role: ROLE_ADMIN }
-        - { path: ^/home, role: ROLE_STUDENT }

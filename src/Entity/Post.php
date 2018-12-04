@@ -20,7 +20,8 @@ class Post
      * @ORM\Column(type="integer")
      */
     private $id;
-     /**
+    
+    /**
      * @ORM\Column(name="title", type="string", length=100)
      */
     private $title;
@@ -34,30 +35,36 @@ class Post
      * @ORM\Column(name="picture", type="string", length=100)
      */
     private $picture;
-     /**
+
+    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="post")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $users;
-     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post")
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post", cascade={"persist", "remove"})
      */
     private $commentaires;
-     public function __toString(){
+
+    public function __toString(){
         return $this->title;
     }
-     public function __construct()
+
+    public function __construct()
     {
         $this->commentaires = new ArrayCollection();
     }
-     /**
+
+    /**
      * Get the value of id
      */ 
     public function getId()
     {
         return $this->id;
     }
-     /**
+
+    /**
      * Set the value of id
      *
      * @return  self
@@ -67,14 +74,16 @@ class Post
         $this->id = $id;
          return $this;
     }
-     /**
+
+    /**
      * Get the value of title
      */ 
     public function getTitle()
     {
         return $this->title;
     }
-     /**
+
+    /**
      * Set the value of title
      *
      * @return  self
@@ -84,14 +93,16 @@ class Post
         $this->title = $title;
          return $this;
     }
-     /**
+
+    /**
      * Get the value of content
      */ 
     public function getContent()
     {
         return $this->content;
     }
-     /**
+
+    /**
      * Set the value of content
      *
      * @return  self
@@ -101,14 +112,16 @@ class Post
         $this->content = $content;
          return $this;
     }
-     /**
+
+    /**
      * Get the value of picture
      */ 
     public function getPicture()
     {
         return $this->picture;
     }
-     /**
+
+    /**
      * Set the value of picture
      *
      * @return  self
@@ -118,14 +131,16 @@ class Post
         $this->picture = $picture;
          return $this;
     }
-     /**
+
+    /**
      * Get the value of users
      */ 
     public function getUsers()
     {
         return $this->users;
     }
-     /**
+    
+    /**
      * Set the value of users
      *
      * @return  self
@@ -135,14 +150,16 @@ class Post
         $this->users = $users;
          return $this;
     }
-     /**
+
+    /**
      * Get the value of commentaires
      */ 
     public function getCommentaires()
     {
         return $this->commentaires;
     }
-     /**
+    
+    /**
      * Set the value of commentaires
      *
      * @return  self

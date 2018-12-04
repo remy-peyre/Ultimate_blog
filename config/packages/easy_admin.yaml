@@ -4,3 +4,5 @@ easy_admin:
         - App\Entity\Post
         - App\Entity\Comment
         - App\Entity\User
+    list:
+       actions: ['edit', 'search', 'delete', 'show']

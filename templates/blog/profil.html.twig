@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <form class="col s12" action="{{ path('profil') }}" method="POST" >
+            <div class="row">
+                <div class="input-field col s6">
+                <label for="first_name">First Name</label>
+                <input required placeholder="{{ user.firstname }}" name="firstname" id="first_name" type="text" class="validate">
+                </div>
+                <div class="input-field col s6">
+                    <label for="last_name">Last Name</label>
+                    <input required placeholder="{{ user.lastname }}" name="lastname" id="last_name" type="text" class="validate">
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                <label for="password">Password</label>
+                <input required id="password" name="password" type="password" class="validate">
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <label for="username">Username</label>
+                    <input required id="username" placeholder="{{ user.username }}" name="username" type="text" class="validate">
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+        </form>
+        {{ user }}
+    </div>
+</div>
+{% endblock %}

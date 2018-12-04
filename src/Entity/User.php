@@ -21,15 +21,18 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $id;
+
      /**
      * @ORM\Column(name="firstname", type="string", length=100)
      */
-	private $firstname;
-     /**
+    private $firstname;
+    
+    /**
      * @ORM\Column(name="lastname", type="string", length=100)
      */
 	private $lastname;
-     /**
+    
+    /**
      * @ORM\Column(name="username", type="string", length=100, nullable=true)
      */
     private $username;
@@ -61,12 +64,12 @@ class User implements UserInterface
     private $sortRole;
 
     /**
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="users")
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="users", cascade={"persist", "remove"})
      */
     private $post;
-    
+
      /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="users")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="users", cascade={"persist", "remove"})
      */
     private $comment;
     
@@ -140,14 +143,15 @@ class User implements UserInterface
 	{
 		$this->createdAt = $createdAt;
 	}
-     /**
+    /**
      * @inheritDoc
      */
     public function getSalt()
     {
         return null;
     }
-     /**
+
+    /**
      * Set role
      *
      * @param array $role
@@ -159,7 +163,8 @@ class User implements UserInterface
         $this->role = $role;
          return $this;
     }
-     /**
+    
+    /**
      * Get role
      *
      * @return array
@@ -168,14 +173,16 @@ class User implements UserInterface
     {
         return $this->role;
     }
-     /**
+    
+    /**
      * @inheritDoc
      */
     public function getRoles()
     {
         return $this->role;
     }
-     /**
+    
+    /**
      * @inheritDoc
      */
     public function eraseCredentials()
@@ -189,7 +196,8 @@ class User implements UserInterface
 	{
 		return $this->sortRole;
 	}
- 	/**
+     
+    /**
 	 * Set the value of sortRole
 	 *
 	 * @return  self
@@ -199,6 +207,7 @@ class User implements UserInterface
 		$this->sortRole = $sortRole;
  		return $this;
     }
+    
     /**
      * Get the value of post
      */ 
@@ -206,7 +215,8 @@ class User implements UserInterface
     {
         return $this->post;
     }
-     /**
+    
+    /**
      * Set the value of post
      *
      * @return  mixed
@@ -216,14 +226,16 @@ class User implements UserInterface
         $this->post = $post;
          return $this;
     }
-     /**
+    
+    /**
      * Get the value of comment
      */ 
     public function getComment()
     {
         return $this->comment;
     }
-     /**
+    
+    /**
      * Set the value of comment
      *
      * @return  mixed
