@@ -78,7 +78,7 @@ class BlogController extends AbstractController
         } else {
             return $this->render('blog/post.html.twig',[
                 'user' => $user,
-                'post' => $post
+                'post' => $post,
             ]);          
         }
     }

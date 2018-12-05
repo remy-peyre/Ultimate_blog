@@ -26,14 +26,13 @@
             
             <div class="row">
                 <h2>Comments</h2>
-                {#{{ comment }}
                 
-                {% for postComment in comment %}
+                {% for post in article.comment %}
+                    <span>Created by {{post.users.username}}, at {{post.createdAt|date("m/d/Y")}}</span>
+                    <p>{{post.content}}</p>
                     <hr>
-                    <span>Created by {{postComment.users.username}}, at {{postComment.createdAt|date("m/d/Y")}}</span>
-                    <p>{{postComment.content}}</p>
-                    <hr>
-                {% endfor %}#}
+                {% endfor %}
+                
             </div>
         {% endfor %}
     </div>
