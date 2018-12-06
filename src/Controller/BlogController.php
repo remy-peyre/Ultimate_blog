@@ -84,6 +84,43 @@ class BlogController extends AbstractController
     }
 
     /**
+     * @Route("/update-post/{id}", name="update-post")
+     */
+    public function updatePostAction(Request $request, $id){
+        $user = $this -> getUser(); 
+        $post = $this -> getDoctrine() -> getRepository(Post::class) -> findOneById($id);
+        
+        if($request->isMethod('POST')){
+            $file = $request -> files-> get("picture") ;
+            $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+            
+            try {
+                $file->move(
+                    $this->getParameter('post_directory'),
+                    $fileName
+                );
+            } catch (FileException $e) {
+                return $this->redirectToRoute('create-post');
+            }
+            
+            $post -> setTitle($request -> get("title"));
+            $post -> setContent($request -> get("content"));
+            $post -> setPicture($fileName);
+            $post -> setUsers($user);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($post);
+            $em->flush();
+            
+            return $this->redirectToRoute('homepage');
+        }
+        return $this -> render('blog/update-post.html.twig',[
+            'user' => $user,
+            'post' => $post,
+
+        ]);
+    }
+
+    /**
      * @Route("/create-comment/{id}", name="create-comment")
      */
     public function createCommentAction(Request $request, $id)
@@ -106,6 +143,32 @@ class BlogController extends AbstractController
         } else {
             return $this->redirectToRoute('homepage');
         }
+    }
+
+    /**
+     * @Route("/delete-comment/{user}/{post}/{id}", name="delete-comment")
+     */
+    public function deleteCommentAction(Request $request, $user, $post, $id)
+    {
+        $user = $this -> getUser();
+        if($request->isMethod('POST'))
+        {
+            $comment =  $this -> getDoctrine() -> getRepository(Comment::class) -> findOneById($id);
+            $post_id = $this -> getDoctrine() -> getRepository(Post::class) -> findOneById($post);
+            if($comment)
+            {
+                if($this -> isGranted('ROLE_USER') && $comment -> getUsers() -> getId() != $user -> getId() )
+                {
+                    return $this->redirectToRoute('show_post', array('id' => $id));
+                }else{
+                    $em = $this->getDoctrine()->getEntityManager();
+                    $em->remove($comment);
+                    $em->flush();
+                    return $this->redirectToRoute('show_post', array('id' => $post_id));
+                }
+            }
+         }
+        return $this->redirectToRoute('homepage');
     }
 
     /**

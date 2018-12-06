@@ -7,7 +7,12 @@
         {% for article in post %}
             <div class="row">
                 <h1>{{article.title}}</h1>
+                <div class="row">
                 <h5>Created by {{article.users.username}}, at {{article.createdAt|date("m/d/Y")}}</h5>
+                    {% if is_granted("ROLE_BLOGGER") %}
+                        <a href="{{path("update-post",{"id": article.id}) }}">Edit</a>
+                    {% endif %}
+                </div>
                 <img src="{{asset('static/images/article/'~ article.picture)}}">
                 <p>{{article.content}}</p>
             </div>
@@ -30,6 +35,20 @@
                 {% for post in article.comment %}
                     <span>Created by {{post.users.username}}, at {{post.createdAt|date("m/d/Y")}}</span>
                     <p>{{post.content}}</p>
+                    {% if is_granted("ROLE_USER") and post.users.username == app.user.username %}
+                        <form method="POST" action="{{path("delete-comment",{"user": post.users.id, "post": article.id  , "id": post.id}) }}" >
+                            <button type="submit" name="action">
+                                Delete
+                            </button>
+                        </form>
+                    {% endif %}
+                    {% if is_granted("ROLE_BLOGGER") or is_granted("ROLE_ADMIN") %}
+                        <form method="POST" action="{{path("delete-comment",{"user": post.users.id, "post": article.id  , "id": post.id}) }}" >
+                            <button type="submit" name="action">
+                                Delete
+                            </button>
+                        </form>
+                    {% endif %}
                     <hr>
                 {% endfor %}
                 
