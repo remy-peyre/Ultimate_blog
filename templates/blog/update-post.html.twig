@@ -8,16 +8,16 @@
     <div class="row">
         <form class="col s12" action="{{path("update-post",{"id": post.id}) }}" method="POST" enctype="multipart/form-data" >
         <div class="row">
-            <div class="input-field col s6">
-            <input required name="title" value="{{post.title}}" id="title" type="text" class="validate">
-            <label for="title">Title</label>
+            <div>
+                <input required name="title" value="{{post.title}}" id="title" type="text" class="validate">
+                <label for="title">Title</label>
             </div>
         </div>
         <div class="row">
             <div class="row">
                 <div class="input-field col s12">
-                <textarea id="textarea1" name="content" required class="materialize-textarea">{{post.content}}</textarea>
-                <label for="textarea1">Content</label>
+                    <textarea id="textarea1" name="content" required class="materialize-textarea">{{post.content}}</textarea>
+                    <label for="textarea1">Content</label>
                 </div>
             </div>
         </div>
@@ -27,9 +27,10 @@
                     <span>Article cover</span>
                     <input type="file" required id="picture" name="picture">
                 </div>
-                <div class="file-path-wrapper">
+                {#<div class="file-path-wrapper">
                     <input class="file-path validate" value="{{post.picture}}" type="text">
-                </div>
+                </div>#}
+                
             </div>
         </div>
         <div class="row" >

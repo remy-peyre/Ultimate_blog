@@ -1,25 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Ultimate Blog - Create a Post{% endblock %}
 
 {% block body %}
-<div class="container" >
+<div class="container" style="height: 100vh;">
     <div class="row">
-        <form class="col s12" action="{{path("create-post")}}" method="POST" enctype="multipart/form-data" >
-            <div class="row">
-                <label for="title">Title</label>
-                <input required name="title" id="title" type="text" class="validate">
+        <form  action="{{path("create-post")}}" method="POST" enctype="multipart/form-data" 
+            style="padding-top: 50px; display: flex; flex-direction: column; align-items: center;">
+            <div class="row" style="width: 300px; margin-bottom: 20px;">
+                <div style="
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                ">
+                    <label for="title">Title</label>
+                    <input required name="title" id="title" type="text" class="validate">
+                </div>
             </div>
-            <div class="row">
-                <label for="textarea1">Content</label>
-                <textarea id="textarea1" name="content" required class="materialize-textarea"></textarea>
+            <div class="row" style="width: 300px; margin-bottom: 20px;">
+                <div style="
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                ">
+                    <label for="textarea1">Content</label>
+                    <textarea id="textarea1" name="content" required class="materialize-textarea"></textarea>
+                </div>
             </div>
-            <div class="row">
-                <span>Article cover</span>
-                <input type="file" required id="picture" name="picture">
+            <div class="row" style="width: 300px; margin-bottom: 20px;">
+                <div style="
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                ">
+                    <label for="picture">Article cover</label>
+                    <input type="file" required id="picture" name="picture">
                 <!--<input class="file-path validate" type="text">-->
+                </div>
             </div>
-            <button type="submit" name="action">Submit</button>
+            <button class="btn btn-primary" type="submit" name="action">Submit</button>
         </form>
     </div>
 </div>
