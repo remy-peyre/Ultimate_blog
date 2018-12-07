@@ -1,47 +1,50 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Ultimate Blog - Login{% endblock %}
+
 {% block body %}
-<div class="section"></div>
-<main>
+<main style="height: 100vh;">
     <center>
         <div class="section"></div>
         {% if error %}
             <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
-        <h5 class="text">Please, login into your account</h5>
-        <div class="section"></div>
+        <h2 class="text">Enter your log account</h2>
         <div class="container">
-        <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
-            <form class="col s12" method="post" action="{{path("login")}}">
-            <div class='row'>
-                <div class='col s12'>
-                </div>
+            <div style="border: 1px solid #EEE;padding: 40px;margin-bottom: 20px;">
+                <form method="post" action="{{path("login")}}">
+
+                    <div class='row' style="width: 300px; margin-bottom: 20px;">
+                        <div style="
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+                        ">
+                            <label for='username'>Enter your username</label>
+                            <input class='validate' type='text' name='_username' id='username' />
+                        </div>
+                    </div>
+
+                    <div class='row' style="width: 300px; margin-bottom: 20px;">
+                        <div style="
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+                        ">
+                            <label for='password'>Enter your password</label>
+                            <input class='validate' type='password' name='_password' id='password' />
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        </div>
+                    </div>
+                    <div class='row' style="width: 300px; margin-bottom: 20px;">
+                        <div>
+                            <button type='submit' name='btn_login' class="btn btn-primary">Login</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-                <div class='row'>
-                <div class='input-field col s12'>
-                <input class='validate' type='text' name='_username' id='username' />
-                <label for='username'>Enter your username</label>
-                </div>
-            </div>
-                <div class='row'>
-                <div class='input-field col s12'>
-                <input class='validate' type='password' name='_password' id='password' />
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                <label for='password'>Enter your password</label>
-                </div>
-            </div>
-                <br />
-            <center>
-                <div class='row'>
-                <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect'>Login</button>
-                </div>
-            </center>
-            </form>
-        </div>
         </div>
         <a href="{{path("register")}}">Create account</a>
     </center>
-    <div class="section"></div>
-    <div class="section"></div>
 </main>
 {% endblock %} 
