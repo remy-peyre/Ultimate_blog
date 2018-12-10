@@ -6,7 +6,7 @@
 <main>
     <div class="container">
         <div class="blog-header">
-                <h1 style="color: #337ab7;" class="blog-title">Welcome on Ultimate Blog Industrialisation</h1>
+                <h1 class="color_title" class="blog-title">Welcome on Ultimate Blog Industrialisation</h1>
                 <p class="lead blog-description">Blog built with Symfony 4, styled in Bootstrap, Sup'internet.</p>
             </div>
         {% for article in post %}
@@ -17,9 +17,9 @@
                             <h2 class="blog-post-title">{{article.title}}</h2>
                         </a>
                         <h6>Created by {{article.users.username}}, at {{article.createdAt|date("m/d/Y")}}</h6>
-                        <div style="display: flex; justify-content: center; flex-direction: column;">
-                            <a style="display: flex;" href="{{path("show_post",{"id": article.id}) }}">
-                                <img style="max-width: 100%; max-height: 300px; margin: auto;" src="{{asset('static/images/article/'~ article.picture)}}" alt="placeholder">
+                        <div class="display_home">
+                            <a class="flex" href="{{path("show_post",{"id": article.id}) }}">
+                                <img class="size_home_img" src="{{asset('static/images/article/'~ article.picture)}}" alt="placeholder">
                             </a>
                             <br>
                             <p>{{article.content}}</p>

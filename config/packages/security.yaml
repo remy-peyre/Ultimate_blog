@@ -34,4 +34,4 @@ security:
         - { path: ^/admin, role: ROLE_ADMIN }
         - { path: ^/create-post, role: [ROLE_BLOGGER, ROLE_ADMIN] }
         - { path: ^/edit-post, role: [ROLE_BLOGGER, ROLE_ADMIN] }
-        - { path: ^/create-comment, role: [ROLE_BLOGGER, ROLE_ADMIN] }
+        - { path: ^/create-comment, role: [ROLE_BLOGGER, ROLE_ADMIN, ROLE_USER] }

@@ -3,36 +3,23 @@
 {% block title %}Ultimate Blog - Create a Post{% endblock %}
 
 {% block body %}
-<div class="container" style="height: 100vh;">
+<div class="container container_height">
     <div class="row">
-        <form  action="{{path("create-post")}}" method="POST" enctype="multipart/form-data" 
-            style="padding-top: 50px; display: flex; flex-direction: column; align-items: center;">
-            <div class="row" style="width: 300px; margin-bottom: 20px;">
-                <div style="
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                ">
+        <form class="flex_form" action="{{path("create-post")}}" method="POST" enctype="multipart/form-data">
+            <div class="row size_row">
+                <div class="display_form">
                     <label for="title">Title</label>
                     <input required name="title" id="title" type="text" class="validate">
                 </div>
             </div>
-            <div class="row" style="width: 300px; margin-bottom: 20px;">
-                <div style="
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                ">
+            <div class="row size_row">
+                <div class="display_form">
                     <label for="textarea1">Content</label>
                     <textarea id="textarea1" name="content" required class="materialize-textarea"></textarea>
                 </div>
             </div>
-            <div class="row" style="width: 300px; margin-bottom: 20px;">
-                <div style="
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                ">
+            <div class="row size_row">
+                <div class="display_form">
                     <label for="picture">Article cover</label>
                     <input type="file" required id="picture" name="picture">
                 <!--<input class="file-path validate" type="text">-->

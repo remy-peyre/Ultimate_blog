@@ -3,7 +3,7 @@
 {% block title %}Ultimate Blog - Login{% endblock %}
 
 {% block body %}
-<main style="height: 100vh;">
+<main class="container_height">
     <center>
         <div class="section"></div>
         {% if error %}
@@ -14,29 +14,21 @@
             <div style="border: 1px solid #EEE;padding: 40px;margin-bottom: 20px;">
                 <form method="post" action="{{path("login")}}">
 
-                    <div class='row' style="width: 300px; margin-bottom: 20px;">
-                        <div style="
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: space-between;
-                        ">
+                    <div class='row size_row'>
+                        <div class="display_form">
                             <label for='username'>Enter your username</label>
                             <input class='validate' type='text' name='_username' id='username' />
                         </div>
                     </div>
 
-                    <div class='row' style="width: 300px; margin-bottom: 20px;">
-                        <div style="
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: space-between;
-                        ">
+                    <div class='row size_row'>
+                        <div class="display_form">
                             <label for='password'>Enter your password</label>
                             <input class='validate' type='password' name='_password' id='password' />
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                         </div>
                     </div>
-                    <div class='row' style="width: 300px; margin-bottom: 20px;">
+                    <div class='row size_row'>
                         <div>
                             <button type='submit' name='btn_login' class="btn btn-primary">Login</button>
                         </div>

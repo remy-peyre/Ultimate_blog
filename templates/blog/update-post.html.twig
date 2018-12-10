@@ -4,45 +4,32 @@
 
 {% block body %}
 
-<div class="container" style="height: 100vh;">
+<div class="container container_height">
     <div class="row">
-        <form action="{{path("update-post",{"id": post.id}) }}" method="POST" enctype="multipart/form-data" 
-            style="padding-top: 50px;display: flex;flex-direction: column;align-items: center;">
-            <div class="row" style="width: 300px; margin-bottom: 20px;">
-                <div style="
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                ">
+        <form class="flex_form" action="{{path("update-post",{"id": post.id}) }}" method="POST" enctype="multipart/form-data">
+            <div class="row size_row">
+                <div class="display_form">
                     <label for="title">Title</label>
                     <input required name="title" value="{{post.title}}" id="title" type="text" class="validate">
                 </div>
             </div>
-            <div class="row" style="width: 300px; margin-bottom: 20px;">
-                    <div style="
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: space-between;
-                    ">
-                        <div>
-                            <label>Cover</label>
-                            <input type="file" required id="picture" name="picture">
-                        </div>
-                        {#
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" value="{{post.picture}}" type="text">
-                        </div>
-                        #}
+            <div class="row size_row">
+                <div class="display_form">
+                    <div>
+                        <label>Cover</label>
+                        <input type="file" required id="picture" name="picture">
                     </div>
+                    {#
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" value="{{post.picture}}" type="text">
+                    </div>
+                    #}
                 </div>
-            <div class="row" style="width: 300px; margin-bottom: 20px;">
-                <div style="
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                ">
+            </div>
+            <div class="row size_row">
+                <div class="display_form">
                     <label for="textarea1">Content</label>
-                    <textarea style="height: 300px;" id="textarea1" name="content" required class="materialize-textarea">{{post.content}}</textarea>
+                    <textarea class="size_textarea" id="textarea1" name="content" required>{{post.content}}</textarea>
                 </div>
             </div>
             <div class="row" >

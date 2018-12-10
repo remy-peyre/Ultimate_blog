@@ -5,16 +5,16 @@
 {% block body %}
     <div class="container" >
         {% for article in post %}
-            <div style="display: flex;flex-direction: column;">
-                <div style="display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: space-between; align-items: center;">
-                    <h2 style="color: #337ab7;margin-bottom: 0;">{{article.title}}</h2>
+            <div class="flex_post">
+                <div class="row_title">
+                    <h2 class="title_post">{{article.title}}</h2>
                     {% if is_granted("ROLE_BLOGGER") %}
                         <a href="{{path("update-post",{"id": article.id}) }}">Edit</a>
                     {% endif %}
                 </div>
-                <h6 style="margin-top: 0;">Created by <b>{{article.users.username}}</b>, at {{article.createdAt|date("m/d/Y")}}</h6>
+                <h6 class="created_style">Created by <b>{{article.users.username}}</b>, at {{article.createdAt|date("m/d/Y")}}</h6>
                 <br>
-                <img style="max-width: 100%; max-height: 300px; margin: auto;" src="{{asset('static/images/article/'~ article.picture)}}">
+                <img class="img_by_post" src="{{asset('static/images/article/'~ article.picture)}}">
                 <br>
                 <p>{{article.content}}</p>
             </div>
@@ -25,7 +25,7 @@
                         <label for="textarea1">Content</label>
                     </div>
                     <div>
-                        <textarea id="textarea1" name="content" required style="width: 100%;height: 60px;margin-bottom: 20px; margin-top: 10px;"></textarea>
+                        <textarea class="textarea_post_comment" id="textarea1" name="content" required></textarea>
                     </div>
                     <button class="btn btn-primary" type="submit" name="action">Submit</button>
                 </form>
@@ -38,20 +38,20 @@
                 {% for post in article.comment %}
                     <span>Created by <b>{{post.users.username}}</b>, at <i>{{post.createdAt|date("m/d/Y")}}</i></span>
                     <p>{{post.content}}</p>
-                    {#{% if is_granted("ROLE_USER") and post.users.username == app.user.username %}
-                        <form method="POST" action="{{path("delete-comment",{"user": post.users.id, "post": article.id  , "id": post.id}) }}" >
-                            <button class="btn btn-primary" type="submit" name="action">
-                                Delete
-                            </button>
-                        </form>
-                    {% endif %}#}
-                    {% if is_granted("ROLE_BLOGGER") or is_granted("ROLE_ADMIN") %}
+                    {% if (is_granted("ROLE_USER") and post.users.username == app.user.username) or is_granted("ROLE_BLOGGER") or is_granted("ROLE_ADMIN") %}
                         <form method="POST" action="{{path("delete-comment",{"user": post.users.id, "post": article.id  , "id": post.id}) }}" >
                             <button class="btn btn-primary" type="submit" name="action">
                                 Delete
                             </button>
                         </form>
                     {% endif %}
+                    {#{% if is_granted("ROLE_BLOGGER") or is_granted("ROLE_ADMIN") %}
+                        <form method="POST" action="{{path("delete-comment",{"user": post.users.id, "post": article.id  , "id": post.id}) }}" >
+                            <button class="btn btn-primary" type="submit" name="action">
+                                Delete
+                            </button>
+                        </form>
+                    {% endif %}#}
                     <hr>
                 {% endfor %}
                 

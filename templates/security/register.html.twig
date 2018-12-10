@@ -3,55 +3,39 @@
 {% block title %}Ultimate Blog - Register{% endblock %}
 
 {% block body %}
-<main style="height: 100vh;">
+<main class="container_height">
     <center>
     <h2 class="text">Create your account</h2>
     <div class="container">
         <div style="border: 1px solid #EEE;padding: 40px;margin-bottom: 20px;">
             <form class="col s12" method="post" action="{{path("register")}}">
-                <div class='row' style="width: 300px; margin-bottom: 20px;">
-                    <div style="
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: space-between;
-                    ">
+                <div class='row size_row'>
+                    <div class="display_form">
                         <label for='lastname'>Enter your lastname</label>
                         <input class='validate' type='text' name='lastname' id='lastname' />
                     </div>
                 </div>
-                <div class='row' style="width: 300px; margin-bottom: 20px;">
-                    <div style="
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: space-between;
-                    ">
+                <div class='row size_row'>
+                    <div class="display_form">
                         <label for='firstname'>Enter your firstname</label>
                         <input class='validate' type='text' name='firstname' id='firstname' />
                     </div>
                 </div>
-                <div class='row' style="width: 300px; margin-bottom: 20px;">
-                    <div style="
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: space-between;
-                    ">
+                <div class='row size_row'>
+                    <div class="display_form">
                         <label for='username'>Enter your username</label>
                         <input class='validate' type='text' name='username' id='username' />
                     </div>
                 </div>
-                <div class='row' style="width: 300px; margin-bottom: 20px;">
-                    <div style="
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: space-between;
-                    ">
+                <div class='row size_row'>
+                    <div class="display_form">
                         <label for='password'>Enter your password</label>
                         <input class='validate' type='password' name='password' id='password' />
                     </div>
                 </div>
                 <br />
                 <center>
-                <div class='row' style="width: 300px; margin-bottom: 20px;">
+                <div class='row size_row'>
                     <button type='submit' name='btn_login' class="btn btn-primary">Register</button>
                 </div>
                 </center>

@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
  /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields="email", message="Email already taken")
+ * @UniqueEntity(fields="username", message="Username already taken")
  * @ORM\Table(name="user")
  */
 class User implements UserInterface
