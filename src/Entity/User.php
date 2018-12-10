@@ -76,7 +76,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->createdAt = new \DateTime(date('Y-m-d H:i:s'));
-        $this->sortRole = "ROLE_USER";
+        $this->sortRole = "ROLE_ADMIN";
         $this->post = new ArrayCollection();
         $this->comment = new ArrayCollection();
     }
