@@ -1,6 +1,7 @@
 <?php
 namespace App\Command;
 use App\Entity\User;
+
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -26,9 +27,11 @@ class CreateUserCommand extends Command
         $this
             ->setDescription('Creates a new user.')
             ->setHelp('This command allows you to create a user...')
-            ->addArgument('userMail', InputArgument::REQUIRED, 'The email of the user.')
-            ->addArgument('role', InputArgument::REQUIRED, 'The role of the user.')
+            ->addArgument('firstname', InputArgument::REQUIRED, 'The username of the user.')
+            ->addArgument('lastname', InputArgument::REQUIRED, 'The username of the user.')
+            ->addArgument('username', InputArgument::REQUIRED, 'The username of the user.')
             ->addArgument('password', InputArgument::REQUIRED, 'The role of the user.')
+            ->addArgument('role', InputArgument::REQUIRED, 'The role of the user.')
 //            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
         ;
     }
@@ -41,9 +44,11 @@ class CreateUserCommand extends Command
             '',
         ]);
         $user = new User();
+        $user->setFirstname($input->getArgument('firstname'));
+        $user->setLastname($input->getArgument('lastname'));
         $user->setUsername($input->getArgument('username'));
         $user->setPassword($this->passwordEncoder->encodePassword($user, $input->getArgument('password')));
-        $user->setRoles([$input->getArgument('role')]);
+        $user->setRole([$input->getArgument('role')]);
         // retrieve the argument value using getArgument()
        $this->objectManager->persist($user);
         $this->objectManager->flush();
